@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "runnerty-executor-parse-xml-json",
+  "definitions": {
+    "config":
+      { "type": "object",
+        "properties":{
+          "id": {"type": "string"},
+          "type": {"type": "string", "pattern": "runnerty-executor-parse-xml-json"}
+      }
+    },
+    "params":
+    {
+      "oneOf":[
+        {
+          "type": "object",
+          "required": ["id", "to"],
+          "properties":{
+            "id": {"type": "string"},
+            "to": {"type": "string", "pattern": "xml"},
+            "json": {"type": "object"},
+            "json_file": {"type": "string"}
+          }
+        },
+        {
+          "type": "object",
+          "required": ["id", "to"],
+          "properties":{
+            "id": {"type": "string"},
+            "to": {"type": "string", "pattern": "json"},
+            "xml": {"type": "string"},
+            "xml_file": {"type": "string"}
+          }
+        }
+      ]
+    }
+  }
+}
