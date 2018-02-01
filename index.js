@@ -1,8 +1,9 @@
 "use strict";
 
-var xml2js = require("xml2js");
-var fs = require('fs');
-var Execution = global.ExecutionClass;
+const xml2js = require("xml2js");
+const fs = require('fs');
+
+const Execution = global.ExecutionClass;
 
 class parseXmlJsonExecutor extends Execution {
   constructor(process) {
@@ -10,12 +11,13 @@ class parseXmlJsonExecutor extends Execution {
   }
 
   exec(params) {
-    var _this = this;
-    var endOptions = {end: 'end'};
+    let _this = this;
+    let endOptions = {end: 'end'};
 
     function parseToJson(xml) {
       return new Promise(async function (resolve, reject) {
-        xml2js.parseString(xml, function (err, result) {
+        let parser = new xml2js.Parser();
+        parser.parseString(xml, function(err, result) {
           resolve(result);
         });
       });
@@ -23,25 +25,25 @@ class parseXmlJsonExecutor extends Execution {
 
     function parseToXml(json) {
       return new Promise(async function (resolve, reject) {
-        var builder = new xml2js.Builder();
-        var result = builder.buildObject(json);
+        let builder = new xml2js.Builder();
+        let result = builder.buildObject(json);
         resolve(result);
       });
     }
 
     function evaluateResults(results) {
       if (params.to === "json") {
-        endOptions.execute_return = JSON.stringify(results);
+        endOptions.data_output = JSON.stringify(results);
         _this.end(endOptions);
 
       } else if (params.to === "xml") {
-        endOptions.execute_return = results;
+        endOptions.data_output = results;
         _this.end(endOptions);
       }
     }
 
     if (params.to === 'json') {
-      var xml = '';
+      let xml = '';
       if (params.xml) {
         xml = params.xml;
       } else if (params.xml_file) {
@@ -54,11 +56,11 @@ class parseXmlJsonExecutor extends Execution {
         .catch(function (err) {
           endOptions.end = 'error';
           endOptions.messageLog = `parseToJson: ${err}`;
-          endOptions.execute_err_return = `parseToJson: ${err}`;
+          endOptions.err_output = `parseToJson: ${err}`;
           _this.end(endOptions);
         });
     } else if (params.to === 'xml') {
-      var json = '';
+      let json = '';
       if (params.json) {
         json = params.json;
       } else if (params.json_file) {
@@ -71,7 +73,7 @@ class parseXmlJsonExecutor extends Execution {
         .catch(function (err) {
           endOptions.end = 'error';
           endOptions.messageLog = `parseToXml: ${err}`;
-          endOptions.execute_err_return = `parseToXml: ${err}`;
+          endOptions.err_output = `parseToXml: ${err}`;
           _this.end(endOptions);
         });
     }
