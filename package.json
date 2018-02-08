@@ -1,5 +1,5 @@
 {
-  "name": "runnerty-executor-parse-xml-json",
+  "name": "@runnerty/executor-parse-xml-json",
   "version": "1.0.0",
   "description": "Runnerty module: XML/JSON parser executor",
   "author": "antoniogenaro",
@@ -7,7 +7,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antoniogenaro/runnerty-executor-parse-xml-json.git"
+    "url": "git+https://github.com/runnerty/executor-parse-xml-json.git"
   },
   "keywords": [
     "runnerty",
@@ -17,13 +17,10 @@
     "json"
   ],
   "bugs": {
-    "url": "https://github.com/antoniogenaro/runnerty-executor-parse-xml-json/issues"
+    "url": "https://github.com/runnerty/executor-parse-xml-json.git/issues"
   },
-  "homepage": "https://github.com/antoniogenaro/runnerty-executor-parse-xml-json#readme",
+  "homepage": "https://github.com/runnerty/executor-parse-xml-json.git#readme",
   "dependencies": {
     "xml2js": "^0.4.19"
-  },
-  "directories": {
-    "test": "test"
   }
 }

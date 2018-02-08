@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "title": "runnerty-executor-parse-xml-json",
+  "title": "@runnerty-executor-parse-xml-json",
   "definitions": {
     "config": {
       "type": "object",
@@ -10,7 +10,7 @@
         },
         "type": {
           "type": "string",
-          "pattern": "runnerty-executor-parse-xml-json"
+          "pattern": "@runnerty-executor-parse-xml-json"
         }
       }
     },

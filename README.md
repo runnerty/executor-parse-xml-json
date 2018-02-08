@@ -4,7 +4,7 @@
 ```json
 {
   "id": "parse-xml-json_default",
-  "type": "runnerty-executor-parse-xml-json"
+  "type": "@runnerty-executor-parse-xml-json"
 }
 ```
 
