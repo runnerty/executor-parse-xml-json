@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/runnerty/schemas/master/schemas/3.0/plan.json",
+  "chains": [
+    {
+      "id": "CHAIN_XML_JSON_PARSE_SAMPLES",
+      "name": "XML-JSON Parse module example chain",
+      "defaults_processes": {
+        "notifications": {
+          "on_start": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') START: PROCESS @GV(PROCESS_ID)"
+            }
+          ],
+          "on_fail": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') ERROR: PROCESS @GV(PROCESS_ID): @GV(PROCESS_EXEC_ERR_OUTPUT)",
+              "mode": "error"
+            }
+          ],
+          "on_end": [
+            {
+              "id": "console_default",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') END: PROCESS @GV(PROCESS_ID)"
+            }
+          ]
+        }
+      },
+      "processes": [
+        {
+          "id": "PARSE_XML_FILE_TO_JSON",
+          "name": "PARSE XML FILE TO JSON",
+          "exec": {
+            "id": "parse-xml-json_default",
+            "to": "json",
+            "xml_file": "./test/sample.xml",
+            "output_file": "./test/output.json"
+          }
+        },
+        {
+          "id": "PARSE_JSON_FILE_TO_XML",
+          "name": "PARSE JSON FILE TO XML",
+          "exec": {
+            "id": "parse-xml-json_default",
+            "to": "xml",
+            "json_file": "./test/sample.json",
+            "output_file": "./test/output.xml",
+            "xml_options": {
+              "headless": true,
+              "cdata": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
