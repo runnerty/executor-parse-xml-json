@@ -1,18 +1,18 @@
-"use strict";
+'use strict';
 
-const xml2js = require("xml2js");
-const fs = require("fs");
+const xml2js = require('xml2js');
+const fs = require('fs');
 
-const Execution = global.ExecutionClass;
+const Executor = require('@runnerty/module-core').Executor;
 
-class parseXmlJsonExecutor extends Execution {
+class parseXmlJsonExecutor extends Executor {
   constructor(process) {
     super(process);
   }
 
   exec(params) {
     let _this = this;
-    let endOptions = { end: "end" };
+    let endOptions = { end: 'end' };
 
     function parseToJson(xml) {
       return new Promise(function (resolve, reject) {
@@ -38,7 +38,7 @@ class parseXmlJsonExecutor extends Execution {
     function evaluateResults(results) {
       return new Promise(function (resolve, reject) {
         if (params.output_file) {
-          fs.writeFile(params.output_file, results, "utf8", function (err) {
+          fs.writeFile(params.output_file, results, 'utf8', function (err) {
             if (err) {
               reject(err);
             } else {
@@ -53,9 +53,9 @@ class parseXmlJsonExecutor extends Execution {
       });
     }
 
-    if (params.to === "json") {
+    if (params.to === 'json') {
       new Promise(function (resolve, reject) {
-        let xml = "";
+        let xml = '';
         if (params.xml) {
           xml = params.xml;
           resolve(xml);
@@ -69,35 +69,39 @@ class parseXmlJsonExecutor extends Execution {
             }
           });
         } else {
-          reject(new Error(`Parsing to ${params.to}, params xml: ${params.xml} or xml_file: ${params.xml_file} not set correctly`));
+          reject(
+            new Error(
+              `Parsing to ${params.to}, params xml: ${params.xml} or xml_file: ${params.xml_file} not set correctly`
+            )
+          );
         }
-      }).then(xml => {
-        parseToJson(xml)
-          .then(results => {
-            evaluateResults(results)
-              .catch(err => {
-                endOptions.end = "error";
+      })
+        .then(xml => {
+          parseToJson(xml)
+            .then(results => {
+              evaluateResults(results).catch(err => {
+                endOptions.end = 'error';
                 endOptions.messageLog = `writeToOutputFileJson: ${err}`;
                 endOptions.err_output = `writeToOutputFileJson: ${err}`;
                 _this.end(endOptions);
               });
-          })
-          .catch(err => {
-            endOptions.end = "error";
-            endOptions.messageLog = `parseToJson: ${err}`;
-            endOptions.err_output = `parseToJson: ${err}`;
-            _this.end(endOptions);
-          });
-      }).catch(err => {
-        endOptions.end = "error";
-        endOptions.messageLog = `readFileToJson: ${err}`;
-        endOptions.err_output = `readFileToJson: ${err}`;
-        _this.end(endOptions);
-      });
-
-    } else if (params.to === "xml") {
+            })
+            .catch(err => {
+              endOptions.end = 'error';
+              endOptions.messageLog = `parseToJson: ${err}`;
+              endOptions.err_output = `parseToJson: ${err}`;
+              _this.end(endOptions);
+            });
+        })
+        .catch(err => {
+          endOptions.end = 'error';
+          endOptions.messageLog = `readFileToJson: ${err}`;
+          endOptions.err_output = `readFileToJson: ${err}`;
+          _this.end(endOptions);
+        });
+    } else if (params.to === 'xml') {
       new Promise(function (resolve, reject) {
-        let json = "";
+        let json = '';
         if (params.json) {
           json = params.json;
           resolve(json);
@@ -111,33 +115,38 @@ class parseXmlJsonExecutor extends Execution {
             }
           });
         } else {
-          reject(new Error(`Parsing to ${params.to}, params json: ${params.json} or json_file: ${params.json_file} not set correctly`));
+          reject(
+            new Error(
+              `Parsing to ${params.to}, params json: ${params.json} or json_file: ${params.json_file} not set correctly`
+            )
+          );
         }
-      }).then(json => {
-        parseToXml(json)
-          .then(results => {
-            evaluateResults(results)
-              .catch(err => {
-                endOptions.end = "error";
+      })
+        .then(json => {
+          parseToXml(json)
+            .then(results => {
+              evaluateResults(results).catch(err => {
+                endOptions.end = 'error';
                 endOptions.messageLog = `writeToOutputFileXml: ${err}`;
                 endOptions.err_output = `writeToOutputFileXml: ${err}`;
                 _this.end(endOptions);
               });
-          })
-          .catch(err => {
-            endOptions.end = "error";
-            endOptions.messageLog = `parseToXml: ${err}`;
-            endOptions.err_output = `parseToXml: ${err}`;
-            _this.end(endOptions);
-          });
-      }).catch(err => {
-        endOptions.end = "error";
-        endOptions.messageLog = `readFileToXml: ${err}`;
-        endOptions.err_output = `readFileToXml: ${err}`;
-        _this.end(endOptions);
-      });
+            })
+            .catch(err => {
+              endOptions.end = 'error';
+              endOptions.messageLog = `parseToXml: ${err}`;
+              endOptions.err_output = `parseToXml: ${err}`;
+              _this.end(endOptions);
+            });
+        })
+        .catch(err => {
+          endOptions.end = 'error';
+          endOptions.messageLog = `readFileToXml: ${err}`;
+          endOptions.err_output = `readFileToXml: ${err}`;
+          _this.end(endOptions);
+        });
     } else {
-      endOptions.end = "error";
+      endOptions.end = 'error';
       endOptions.messageLog = `param 'to': ${params.to} not set correctly use to json/xml`;
       endOptions.err_output = `param 'to': ${params.to} not set correctly use to json/xml`;
       _this.end(endOptions);
