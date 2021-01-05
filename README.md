@@ -128,3 +128,4 @@ Options definitions for `json_options` and `xml_options` params can be found her
 [david-badge-url]: https://david-dm.org/runnerty/executor-parse-xml-json
 [config.json]: http://docs.runnerty.io/config/
 [plan.json]: http://docs.runnerty.io/plan/
+[runnerty-cli]: https://www.npmjs.com/package/runnerty-cli
