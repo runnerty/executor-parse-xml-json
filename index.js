@@ -10,8 +10,7 @@ class parseXmlJsonExecutor extends Executor {
     super(process);
   }
 
-  exec(params) {
-    let _this = this;
+  async exec(params) {
     let endOptions = { end: 'end' };
 
     async function parseToJson(xml) {
@@ -38,13 +37,13 @@ class parseXmlJsonExecutor extends Executor {
       try {
         await fs.promises.writeFile(params.output_file, results, 'utf8');
         endOptions.data_output = results;
-        _this.end(endOptions);
+        this.end(endOptions);
       } catch (err) {
         throw err;
       }
     }
 
-    // MAIN: 
+    // MAIN:
     if (params.to === 'json') {
       try {
         if (!params.xml && !params.xml_file) {
@@ -55,15 +54,14 @@ class parseXmlJsonExecutor extends Executor {
         let xml = params.xml || '';
         if (params.xml_file) xml = await fs.promises.readFile(params.xml_file);
         const results = await parseToJson(xml);
-        await evaluateResults(results);  
+        await evaluateResults(results);
       } catch (err) {
         endOptions.end = 'error';
         endOptions.messageLog = err;
         endOptions.err_output = err;
-        _this.end(endOptions);
+        this.end(endOptions);
       }
     } else if (params.to === 'xml') {
-
       try {
         if (!params.json && !params.json) {
           throw new Error(
@@ -78,13 +76,13 @@ class parseXmlJsonExecutor extends Executor {
         endOptions.end = 'error';
         endOptions.messageLog = err;
         endOptions.err_output = err;
-        _this.end(endOptions);
+        this.end(endOptions);
       }
     } else {
       endOptions.end = 'error';
       endOptions.messageLog = `param 'to': ${params.to} not set correctly use to json/xml`;
       endOptions.err_output = `param 'to': ${params.to} not set correctly use to json/xml`;
-      _this.end(endOptions);
+      this.end(endOptions);
     }
   }
 }

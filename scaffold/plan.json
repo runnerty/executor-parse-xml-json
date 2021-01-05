@@ -37,20 +37,6 @@
             "xml_file": "./test/sample.xml",
             "output_file": "./test/output.json"
           }
-        },
-        {
-          "id": "PARSE_JSON_FILE_TO_XML",
-          "name": "PARSE JSON FILE TO XML",
-          "exec": {
-            "id": "parse-xml-json_default",
-            "to": "xml",
-            "json_file": "./test/sample.json",
-            "output_file": "./test/output.xml",
-            "xml_options": {
-              "headless": true,
-              "cdata": true
-            }
-          }
         }
       ]
     }

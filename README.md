@@ -13,8 +13,24 @@
 # XML/JSON Parser executor for [Runnerty]:
 
 ### Installation:
+Through NPM
+
 ```bash
 npm i @runnerty/executor-parse-xml-json
+```
+
+You can also add modules to your project with [runnerty-cli]
+
+```bash
+npx runnerty-cli add @runnerty/executor-parse-xml-json
+```
+
+This command installs the module in your project, adds example configuration in your `config.json` and creates an example plan of use.
+
+If you have installed [runnerty-cli] globally you can include the module with this command:
+
+```bash
+rty add @runnerty/executor-parse-xml-json
 ```
 
 ### Configuration sample:
