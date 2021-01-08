@@ -1,13 +1,16 @@
 {
   "name": "@runnerty/executor-parse-xml-json",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Runnerty module: XML/JSON parser executor",
-  "author": "antoniogenaro",
+  "author": "Runnerty Tech",
   "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/runnerty/executor-parse-xml-json.git"
+  },
+  "scripts": {
+    "lint": "eslint '**/*.js' && prettier --check '**'"
   },
   "keywords": [
     "runnerty",
@@ -21,6 +24,13 @@
   },
   "homepage": "https://github.com/runnerty/executor-parse-xml-json.git#readme",
   "dependencies": {
-    "xml2js": "^0.4.19"
+    "@runnerty/module-core": "3.0.1",
+    "xml2js": "0.4.23"
+  },
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
   }
 }
