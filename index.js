@@ -11,13 +11,13 @@ class parseXmlJsonExecutor extends Executor {
   }
 
   async exec(params) {
-    let endOptions = { end: 'end' };
+    const endOptions = { end: 'end' };
 
     async function parseToJson(xml) {
       try {
         const parser = new xml2js.Parser(params.json_options);
         const result = await parser.parseStringPromise(xml);
-        resolve(JSON.stringify(result));
+        return JSON.stringify(result);
       } catch (err) {
         throw err;
       }
