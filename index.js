@@ -63,9 +63,9 @@ class parseXmlJsonExecutor extends Executor {
       }
     } else if (params.to === 'xml') {
       try {
-        if (!params.json && !params.json) {
+        if (!params.json && !params.json_file) {
           throw new Error(
-            `Parsing to ${params.to}, params json: ${params.xml} or json_file: ${params.xml_file} not set correctly`
+            `Parsing to ${params.to}, params json: ${params.json} or json_file: ${params.json_file} not set correctly`
           );
         }
         let json = params.json || '';
